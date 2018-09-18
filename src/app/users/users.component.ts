@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {UsersService} from "./shared/users.service";
-import {User} from "./shared/user";
+import {UsersService} from './shared/users.service';
+import {User} from './shared/user';
+
+// import {PageEvent} from '@angular/material';
+
+
+
 
 @Component({
   selector: 'app-users',
@@ -8,6 +13,9 @@ import {User} from "./shared/user";
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
+
+
+
 
   private users: User[] = [];
 
@@ -19,14 +27,14 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser(user){
-    if (confirm("Are you sure you want to delete " + user.name + "?")) {
-      var index = this.users.indexOf(user);
+    if (confirm('Are you sure you want to delete ' + user.name + '?')) {
+      const index = this.users.indexOf(user);
       this.users.splice(index, 1);
 
       this.usersService.deleteUser(user.id)
         .subscribe(null,
           err => {
-            alert("Could not delete user.");
+            alert('Could not delete user.');
             // Revert the view back to its original state
             this.users.splice(index, 0, user);
           });
